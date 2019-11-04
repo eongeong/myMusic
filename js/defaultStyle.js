@@ -17,10 +17,17 @@ const defaultStyle = [
       outline: "none",
       backgroundColor: "transparent"
   }],
-  ["[oneline]", {
+  ["[ellipsis]", {
       overflow: "hidden",
       textOverflow: "ellipsis",
       whiteSpace: "nowrap"
+  }],
+  ["[ellipsis2]", {
+    display: "-webkit-box",
+    WebkitLineClamp: "2",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    WebkitBoxOrient: "vertical"
   }]
 ];
 export default defaultStyle;
