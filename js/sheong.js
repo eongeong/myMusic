@@ -146,8 +146,8 @@
         }
     };
           
-    dev.commands["she-for"] = function (VRElement, value, name) {
-        if (value !== null && typeof value === "object") {
+    dev.commands["she-for"] = function (VRElement, forData, name) {
+        if (forData !== null && typeof forData === "object") {
             const superiorElement = dev.getSuperiorElement(VRElement);
             if (superiorElement !== null) {
                 const VRElementElement = VRElement.element;
@@ -167,9 +167,8 @@
                     VRElementElementParentNode.removeChild(VRElementElement.nextElementSibling);
                 }
   
-                for (const key in value) {
+                for (const key in forData) {
                     const cloneElement = VRElementElement.cloneNode(true);
-                    cloneElement.setAttribute(forCookie_1, JSON.stringify(value[key]));
                     cloneElement.setAttribute(forCookie_2, key);
                     fragment.appendChild(cloneElement);
                 }
@@ -179,20 +178,22 @@
                 const superiorNode = dev.getSuperiorNode(superiorElement);
   
                 const getData = function (VRElementElement, name) {
-                    if (VRElementElement.hasAttribute(name)) {
+                    if (VRElementElement.hasAttribute("she-for")) {
+                        const index = VRElementElement.getAttribute( forCookie_2 );
                         if (name === forCookie_1) {
-                            return JSON.parse(VRElementElement.getAttribute( forCookie_1 ));
+                            return forData[index];
                         } else {
-                            return VRElementElement.getAttribute( forCookie_2 );
+                            return index;
                         }
                     } else {
                         let element = VRElementElement.parentNode;
                         while (element.nodeName !== "BODY") {
                             if (element.hasAttribute("she-for")) {
+                                const index = element.getAttribute( forCookie_2 );
                                 if (name === forCookie_1) {
-                                    return JSON.parse(element.getAttribute( forCookie_1 ));
+                                    return forData[index];
                                 } else {
-                                    return element.getAttribute( forCookie_2 );
+                                    return index;
                                 }
                             }
                             element = element.parentNode;
@@ -477,6 +478,13 @@
         const styleTag = document.createElement("style");
         styleTag.textContent = styleString;
         headTag.appendChild(styleTag);
+    };
+
+    she.hashchange = function (callback) {
+        window.onhashchange = function () {
+            callback(location.hash.replace(new RegExp("\\?.*", "g"), ""));
+        };
+        location.hash = "#/";
     };
   
     dev.createTree(document.body.children, dev.tree);

@@ -1,48 +1,24 @@
 import she from "./sheong"
+import footer from "./footer"
+import theme from './theme'
 export default function () {
+    const {color,bgColor} = theme;
     she
-    ("container")([
-        ["div",{ class:"clickMe", sheChange:"clickMeChange", she:"clickMe" },["点我"]],
-        ["div",{ sheFor:"items;item;i", sheAttribute:"{ style:item.css }" }, [
-            ["p", { sheContent:"item.text" }],
-            ["p", { sheFor:"item.arr;ite;i" , sheContent:"ite"}]
-        ]]
+    ("appCont")([
+        ["div",{ class:'addMusic fcc' },[
+            ["span",{},['添加本地歌曲']]
+        ]],
+        ["div", { sheContent:"footer" }]
     ])
-    ("clickMe")((el)=>{
-        el.onclick = function () {
-            she
-            ("clickMeChange")([
-                {backgroundColor: "orange "},
-                {backgroundColor: "yellow"},
-                {backgroundColor: "green"},
-                {backgroundColor: "red"}
-            ])
-        }
-        return false;
-    })
-    ("items")([
-        {
-            css: "background-color:red;",
-            text:"一",
-            arr: [1,2,3]
-        },
-        {
-            css: "background-color:orange;",
-            text:"二",
-            arr: [1,2,3]
-        },
-        {
-            css: "background-color:green;",
-            text:"三",
-            arr: [1,2,3]
-        }
-    ])
+    
+    footer();
 
     she.style([
-        [".clickMe", {
-            width: "100px",
-            height: "50px",
-            backgroundColor: "red"
+        [".addMusic", {
+            color: 'rgb(255,255,255)',
+            fontSize: '24px',
+            width:'100%',
+            paddingTop:'30px'
         }]
     ]);
 }
