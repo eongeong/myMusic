@@ -84,7 +84,9 @@ export default function () {
             color,
             fontSize:'18px',
             flex:'1',
-            height:'100%'
+            height:'100%',
+            borderTop: '2px solid transparent',
+            borderBottom: '2px solid transparent'
         }],
     ]);
 }
