@@ -1,30 +1,31 @@
 import she from "./sheong"
 import defaultStyle from "./defaultStyle"
 import flex from "./flex"
-import home from "./home"
 import theme from './theme'
+import tools from './tools'
+
+import home from "./home"
+import getMusic from "./getMusic"
 
 const {color,bgColor} = theme;
+const {setAppHeight} = tools;
 
+// getMusic();
 home();
+setAppHeight();
+
 she.hashchange((hash) =>{
     switch (hash) {
         case "#/":
             home();
             break;
+        case "#/getMusic":
+            getMusic();
+            break;
     }
-});
 
-she
-("appEl")((el)=>{
-    const elHeight = parseInt(getComputedStyle(el).height);
-    const winHeight = document.documentElement.clientHeight;
-    if ( elHeight < winHeight ) {
-        she.style([
-            ["#app",{ height: winHeight + 'px' }]
-        ])
-    }
-})
+    setAppHeight();
+});
 
 she.style(defaultStyle);
 she.style(flex);
